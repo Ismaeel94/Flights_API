@@ -16,8 +16,8 @@ class Flight(BaseModel):
     airline : str
     dep_date: datetime
     dep_land_date : datetime
-    ret_date : datetime
-    ret_land_date : datetime 
+    ret_date : Optional[datetime] = None
+    ret_land_date : Optional[datetime] = None
 
 class FlightsResponse(BaseModel):
     status: str
@@ -52,8 +52,8 @@ def get_flights_info(destination, dep_date, ret_date):
                       airline = airline,
                       dep_date = random_time_on_date(dep_date, True),
                       dep_land_date = random_time_on_date(dep_date, False),
-                      ret_date = random_time_on_date(ret_date, True),
-                      ret_land_date = random_time_on_date(ret_date, False)))
+                      **({"ret_date": random_time_on_date(ret_date, True),
+                      "ret_land_date": random_time_on_date(ret_date, False)} if ret_date is not None else {})
 
     return FlightsResponse(status = "ok", message = "Flights found.", flights = flights)
   except Exception as e:
