@@ -34,7 +34,7 @@ def hello_world(name : str = 'Ismaeel'):
   return {"message" : f"hello, {name}"}
 
 @app.get("/flights/", response_model=FlightsResponse)
-def flights(destination : str, dep_date : date, ret_date : date = None):
+def flights(destination : str, dep_date : date, ret_date: Optional[date] = None):
   logger.info(f"Request: destination={destination}, dep_date={dep_date}, ret_date={ret_date}")
   
   return get_flights_info(destination, dep_date, ret_date)
