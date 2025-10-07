@@ -53,7 +53,7 @@ def get_flights_info(destination, dep_date, ret_date):
                       dep_date = random_time_on_date(dep_date, True),
                       dep_land_date = random_time_on_date(dep_date, False),
                       **({"ret_date": random_time_on_date(ret_date, True),
-                      "ret_land_date": random_time_on_date(ret_date, False)} if ret_date is not None else {})
+                      "ret_land_date": random_time_on_date(ret_date, False)} if ret_date is not None else {})))
 
     return FlightsResponse(status = "ok", message = "Flights found.", flights = flights)
   except Exception as e:
